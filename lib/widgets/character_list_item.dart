@@ -7,7 +7,8 @@ class CharacterListItem extends StatelessWidget {
   final String description;
   final String imgUrl;
 
-  const CharacterListItem({Key key, this.index, this.name, this.description, this.imgUrl});
+  const CharacterListItem(
+      {Key key, this.index, this.name, this.description, this.imgUrl});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,58 +18,58 @@ class CharacterListItem extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Container(
-            width: 50.0,
-            height: 50.0,
-            margin: EdgeInsets.only(right: 15.0),
-            color: index == -1 ? Colors.grey : Colors.transparent,
-            child: //(imgUrl != null && imgUrl.isNotEmpty) ? Image.network(imgUrl) : null,
-                Stack(
-                  children: <Widget>[
-                    Center(child: CircularProgressIndicator(strokeWidth: 1.0,)),
-                    Center(
-                      child: _buildCharacterImageWidget(index, imgUrl)
-                    ),
-                  ],
-                )
-          ),
+              width: 50.0,
+              height: 50.0,
+              margin: EdgeInsets.only(right: 15.0),
+              color: index == -1 ? Colors.grey : Colors.transparent,
+              child: Stack(
+                children: <Widget>[
+                  Center(
+                      child: CircularProgressIndicator(
+                    strokeWidth: 1.0,
+                  )),
+                  Center(child: _buildCharacterImageWidget(index, imgUrl)),
+                ],
+              )),
           index != -1
               ? Flexible(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  '$name',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                Text('$description',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          )
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        '$name',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        '$description',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
+                )
               : Expanded(
-            child: Container(
-              color: Colors.grey,
-            ),
-          )
+                  child: Container(
+                    color: Colors.grey,
+                  ),
+                )
         ],
       ),
     );
   }
-  
+
   Widget _buildCharacterImageWidget(int index, String imgUrl) {
     if (index == -1) {
       return null;
-    } 
-    
+    }
+
     if (imgUrl != null && imgUrl.isNotEmpty) {
       return FadeInImage.memoryNetwork(
         placeholder: kTransparentImage,
         image: imgUrl,
       );
-    } 
-    
+    }
+
     return Icon(Icons.broken_image);
   }
 }

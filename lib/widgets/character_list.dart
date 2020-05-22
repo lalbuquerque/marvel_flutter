@@ -57,9 +57,10 @@ class CharactersListState extends State<CharactersList>
                         controller: _scrollController,
                         itemCount: _characters.length + 1,
                         itemBuilder: (context, index) {
-
                           if (index == _characters.length) {
-                            return LoadingListItem(index: index,);
+                            return LoadingListItem(
+                              index: index,
+                            );
                           }
 
                           final character = _characters[index];
