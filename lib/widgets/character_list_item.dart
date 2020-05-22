@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class CharacterListItem extends StatelessWidget {
   final int index;
@@ -19,8 +20,16 @@ class CharacterListItem extends StatelessWidget {
             width: 50.0,
             height: 50.0,
             margin: EdgeInsets.only(right: 15.0),
-            color: Colors.blue,
-            child: (imgUrl != null && imgUrl.isNotEmpty) ? Image.network(imgUrl) : null,
+            color: index == -1 ? Colors.grey : Colors.transparent,
+            child: //(imgUrl != null && imgUrl.isNotEmpty) ? Image.network(imgUrl) : null,
+                Stack(
+                  children: <Widget>[
+                    Center(child: CircularProgressIndicator(strokeWidth: 1.0,)),
+                    Center(
+                      child: _buildCharacterImageWidget(index, imgUrl)
+                    ),
+                  ],
+                )
           ),
           index != -1
               ? Flexible(
@@ -46,5 +55,20 @@ class CharacterListItem extends StatelessWidget {
         ],
       ),
     );
+  }
+  
+  Widget _buildCharacterImageWidget(int index, String imgUrl) {
+    if (index == -1) {
+      return null;
+    } 
+    
+    if (imgUrl != null && imgUrl.isNotEmpty) {
+      return FadeInImage.memoryNetwork(
+        placeholder: kTransparentImage,
+        image: imgUrl,
+      );
+    } 
+    
+    return Icon(Icons.broken_image);
   }
 }
