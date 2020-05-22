@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:marvelflutter/model/character_response.dart';
 import 'package:marvelflutter/presenter/characters_presenter.dart';
 import 'package:marvelflutter/view/characters_view.dart';
+import 'package:marvelflutter/widgets/loading_list_item.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'character_list_item.dart';
@@ -54,8 +55,13 @@ class CharactersListState extends State<CharactersList>
                       )
                     : ListView.builder(
                         controller: _scrollController,
-                        itemCount: _characters.length,
+                        itemCount: _characters.length + 1,
                         itemBuilder: (context, index) {
+
+                          if (index == _characters.length) {
+                            return LoadingListItem(index: index,);
+                          }
+
                           final character = _characters[index];
                           return CharacterListItem(
                             index: index,
