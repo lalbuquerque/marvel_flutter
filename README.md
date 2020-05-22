@@ -6,4 +6,4 @@ with Flutter
 I've tried to apply sort of a MVP pattern but this is a Work In Progress
 so be kind
 
-![marvel_flutter](images/marvel_flutter_2.gif)
+<img src="images/marvel_flutter_2.gif" width="250" height="500"/>
